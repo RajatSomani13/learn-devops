@@ -8,10 +8,10 @@ spec:
   source:
     repoURL: https://github.com/RajatSomani13/learn-devops.git
     targetRevision: HEAD
-    path: kustomize/overlays/dev/datasource/postgres
+    path: kustomize/overlays/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: myapp
+    namespace: postgres
 
   syncPolicy:
     syncOptions:
