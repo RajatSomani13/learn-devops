@@ -18,7 +18,7 @@ spec:
           - chart: cnpg
             name: cnpg
             namespace: ds
-            revision: 1.22.3
+            revision: 0.21.2
             valuesFile: $values/datasource/postgres/values.yaml
             repo: https://cloudnative-pg.github.io/charts
 
