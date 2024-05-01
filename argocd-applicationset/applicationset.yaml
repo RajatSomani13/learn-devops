@@ -9,10 +9,17 @@ spec:
   generators:
     - list:
         elements:
-          - name: external-secrets
+          - chart: external-secrets
+            name: external-secrets
+            revision: 0.9.11
             namespace: external-secrets
-          - name: cloudnativepg
+            valuesFile: cluster-services/eso/values.yaml
+          - chart: cloudnativepg
+            name: cloudnativepg
             namespace: ds
+            revision: 0.18.0
+            valuesFile: datasource/postgres/values.yaml
+
   template:
     metadata:
       name: "{{.name}}"
@@ -28,18 +35,12 @@ spec:
   templatePatch: |
     spec:
       sources:
-        - repoURL: 'https://github.com/RajatSomani13/learn-devops.git'
+        - repoURL: '{{ .repo }}'
+          chart: '{{ .chart }}'
+          targetRevision: '{{ .revision }}'
+          helm:
+            valueFiles:
+              - '{{ .valuesFile }}'
+        - repoURL: https://github.com/RajatSomani13/learn-devops.git
           targetRevision: HEAD
-          helmCharts:
-            - name: external-secrets
-              repo: 'https://charts.external-secrets.io'
-              chart: 'external-secrets'
-              version: '0.9.11'
-              releaseName: 'external-secrets-operator'
-              valuesFile: 'eso/values.yaml'
-            - name: cloudnativepg
-              repo: 'https://charts.cloudnative-pg.io'
-              chart: 'cloudnative-pg'
-              version: '0.18.0'
-              releaseName: 'cloudnativepg-cluster'
-              valuesFile: 'postgres/values.yaml'
+          ref: values
