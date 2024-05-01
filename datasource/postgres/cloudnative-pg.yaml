@@ -1,0 +1,18 @@
+apiVersion: cloudnative-pg.io/v1
+kind: Cluster
+metadata:
+  name: cloudnativepg-cluster
+  namespace: ds
+spec:
+  instances: 3 # Number of PostgreSQL instances
+  imageName: "cloudnative-pg:latest" # CloudNativePG image for PostgreSQL
+  postgresql:
+    users:
+      - name: admin
+        superuser: true
+        secretName: cloudnativepg-secrets
+        secretKey: POSTGRES_USER
+    passwordSecretName: cloudnativepg-secrets
+    passwordSecretKey: POSTGRES_PASSWORD
+  persistence:
+    size: 10Gi # Persistent volume size

@@ -1,0 +1,45 @@
+# argocd/argocd-unified-applicationset.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: unified-applicationset
+  namespace: argocd
+spec:
+  goTemplate: true
+  generators:
+    - list:
+        elements:
+          - name: external-secrets
+            namespace: external-secrets
+          - name: cloudnativepg
+            namespace: ds
+  template:
+    metadata:
+      name: "{{.name}}"
+    spec:
+      project: default
+      syncPolicy:
+        automated: {}
+        syncOptions:
+          - CreateNamespace=true
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{.namespace | default "default"}}'
+  templatePatch: |
+    spec:
+      sources:
+        - repoURL: 'https://github.com/RajatSomani13/learn-devops.git'
+          targetRevision: HEAD
+          helmCharts:
+            - name: external-secrets
+              repo: 'https://charts.external-secrets.io'
+              chart: 'external-secrets'
+              version: '0.9.11'
+              releaseName: 'external-secrets-operator'
+              valuesFile: 'eso/values.yaml'
+            - name: cloudnativepg
+              repo: 'https://charts.cloudnative-pg.io'
+              chart: 'cloudnative-pg'
+              version: '0.18.0'
+              releaseName: 'cloudnativepg-cluster'
+              valuesFile: 'postgres/values.yaml'

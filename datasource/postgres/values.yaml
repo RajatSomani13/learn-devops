@@ -1,0 +1,7 @@
+postgresql:
+  instances:
+    count: 3
+  superuser:
+    name: admin
+  persistence:
+    size: 10Gi # Persistent volume size
