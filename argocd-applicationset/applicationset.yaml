@@ -14,11 +14,11 @@ spec:
             revision: 0.9.11
             namespace: external-secrets
             valuesFile: cluster-services/eso/values.yaml
-          - chart: cloudnativepg
-            name: cloudnativepg
-            namespace: ds
-            revision: 0.18.0
-            valuesFile: datasource/postgres/values.yaml
+          # - chart: cloudnativepg
+          #   name: cloudnativepg
+          #   namespace: ds
+          #   revision: 0.18.0
+          #   valuesFile: datasource/postgres/values.yaml
 
   template:
     metadata:
