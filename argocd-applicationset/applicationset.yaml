@@ -15,11 +15,12 @@ spec:
             namespace: external-secrets
             valuesFile: $values/cluster-services/eso/values.yaml
             repo: https://charts.external-secrets.io
-          # - chart: cloudnativepg
-          #   name: cloudnativepg
-          #   namespace: ds
-          #   revision: 0.18.0
-          #   valuesFile: datasource/postgres/values.yaml
+          - chart: cloudnativepg
+            name: cloudnativepg
+            namespace: ds
+            revision: 0.18.0
+            valuesFile: $values/datasource/postgres/values.yaml
+            repo: https://cloudnative-pg.github.io/charts
 
   template:
     metadata:
@@ -43,5 +44,5 @@ spec:
             valueFiles:
               - '{{ .valuesFile }}'
         - repoURL: https://github.com/RajatSomani13/learn-devops.git
-          targetRevision: HEAD
+          targetRevision: main
           ref: values
