@@ -18,7 +18,7 @@ spec:
           - chart: cloudnativepg
             name: cloudnativepg
             namespace: ds
-            revision: 0.18.0
+            revision: 1.10.0
             valuesFile: $values/datasource/postgres/values.yaml
             repo: https://cloudnative-pg.github.io/charts
 
