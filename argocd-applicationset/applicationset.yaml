@@ -15,10 +15,9 @@ spec:
             namespace: external-secrets
             valuesFile: $values/cluster-services/eso/values.yaml
             repo: https://charts.external-secrets.io
-          - chart: cloudnativepg
-            name: cloudnativepg
+          - chart: cnpg
+            name: cnpg
             namespace: ds
-            revision: 1.10.0
             valuesFile: $values/datasource/postgres/values.yaml
             repo: https://cloudnative-pg.github.io/charts
 
